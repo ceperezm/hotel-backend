@@ -25,7 +25,7 @@ public class Factura {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "reserva_id", nullable = false)
+    @JoinColumn(name = "reservacion_id", nullable = false)
     private Reservacion reservacion;
 
     @Column(name = "numero_factura", unique = true)

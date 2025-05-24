@@ -37,7 +37,7 @@ public class Reservacion {
     private String notas;
 
     @Enumerated(EnumType.STRING)
-    private EstadoReservacion estado;
+    private EstadoReservacion estadoReservacion;
 
     // Relación con factura
     @OneToOne(mappedBy = "reservacion", cascade = CascadeType.ALL)

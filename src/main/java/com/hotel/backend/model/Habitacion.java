@@ -2,6 +2,7 @@ package com.hotel.backend.model;
 
 import com.hotel.backend.model.emuns.EstadoHabitacion;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class Habitacion {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    @Positive
+    @NotBlank
     private String numero;
 
     @Enumerated(EnumType.STRING)
