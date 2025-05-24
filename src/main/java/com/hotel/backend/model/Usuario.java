@@ -3,10 +3,10 @@ package com.hotel.backend.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +16,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,5 +53,5 @@ public class Usuario {
 
     // Relación con reservaciones
     @OneToMany(mappedBy = "usuario")
-    private List<Reservacion> reservaciones = new ArrayList<>();
+    private List<Reserva> reservaciones = new ArrayList<>();
 }

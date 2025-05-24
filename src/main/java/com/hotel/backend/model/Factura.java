@@ -3,9 +3,9 @@ package com.hotel.backend.model;
 import com.hotel.backend.model.emuns.EstadoPago;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +19,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,7 @@ public class Factura {
 
     @OneToOne
     @JoinColumn(name = "reservacion_id", nullable = false)
-    private Reservacion reservacion;
+    private Reserva reservacion;
 
     @Column(name = "numero_factura", unique = true)
     private String numeroFactura;

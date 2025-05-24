@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Huesped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,5 +62,5 @@ public class Huesped {
 
     // Relación con reservaciones
     @OneToMany(mappedBy = "huesped", cascade = CascadeType.ALL)
-    private List<Reservacion> reservaciones = new ArrayList<>();
+    private List<Reserva> reservaciones = new ArrayList<>();
 }

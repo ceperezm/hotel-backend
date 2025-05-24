@@ -4,6 +4,7 @@ import com.hotel.backend.model.emuns.EstadoReservacion;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +16,8 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reservacion {
+@Builder
+public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,7 +39,7 @@ public class Reservacion {
     private String notas;
 
     @Enumerated(EnumType.STRING)
-    private EstadoReservacion estadoReservacion;
+    private EstadoReservacion estadoReserva;
 
     // Relación con factura
     @OneToOne(mappedBy = "reservacion", cascade = CascadeType.ALL)

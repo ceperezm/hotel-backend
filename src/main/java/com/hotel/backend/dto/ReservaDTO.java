@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservacionDTO {
+public class ReservaDTO {
     Long id;
     @NotNull
     LocalDateTime fechaReserva;

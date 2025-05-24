@@ -3,8 +3,8 @@ package com.hotel.backend.model;
 import com.hotel.backend.model.emuns.EstadoHabitacion;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Habitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +34,7 @@ public class Habitacion {
 
     // Relación con reservaciones
     @OneToMany(mappedBy = "habitacion", cascade = CascadeType.ALL)
-    private List<Reservacion> reservaciones = new ArrayList<>();
+    private List<Reserva> reservaciones = new ArrayList<>();
 
     // Relación con tipo de habitaciones
     @ManyToOne(fetch = FetchType.LAZY)
