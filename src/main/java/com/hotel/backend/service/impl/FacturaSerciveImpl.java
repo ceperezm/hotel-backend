@@ -24,7 +24,7 @@ public class FacturaSerciveImpl implements FacturaService {
     private final FacturaMapper facturaMapper;
     @Override
     public FacturaDTO generarFactura(FacturaDTO dto) {
-        Reserva reserva = reservaRepository.findById(dto.getReservacionId())
+        Reserva reserva = reservaRepository.findById(dto.getReservaId())
                 .orElseThrow(() -> new ResourceNotFoundException("Reservación no encontrada"));
 
         if (facturaRepository.existsByNumeroFactura(dto.getNumeroFactura())) {
@@ -32,7 +32,7 @@ public class FacturaSerciveImpl implements FacturaService {
         }
 
         Factura factura = facturaMapper.toEntity(dto);
-        factura.setReservacion(reserva);
+        factura.setReserva(reserva);
 
         factura = facturaRepository.save(factura);
         return facturaMapper.toDTO(factura);
@@ -49,7 +49,7 @@ public class FacturaSerciveImpl implements FacturaService {
             throw new FacturaYaExiste("El número de factura ya está en uso.");
         }
 
-        Reserva reserva = reservaRepository.findById(dto.getReservacionId())
+        Reserva reserva = reservaRepository.findById(dto.getReservaId())
                 .orElseThrow(() -> new ResourceNotFoundException("Reservación no encontrada"));
 
         facturaExistente.setNumeroFactura(dto.getNumeroFactura());
@@ -57,7 +57,7 @@ public class FacturaSerciveImpl implements FacturaService {
         facturaExistente.setFechaVencimiento(dto.getFechaVencimiento());
         facturaExistente.setEstadoPago(dto.getEstadoPago());
         facturaExistente.setTotal(dto.getTotal());
-        facturaExistente.setReservacion(reserva);
+        facturaExistente.setReserva(reserva);
 
         facturaExistente = facturaRepository.save(facturaExistente);
         return facturaMapper.toDTO(facturaExistente);
