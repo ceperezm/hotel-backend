@@ -1,6 +1,6 @@
 package com.hotel.backend.model;
 
-import com.hotel.backend.model.emuns.EstadoReservacion;
+import com.hotel.backend.enums.EstadoReservacion;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;

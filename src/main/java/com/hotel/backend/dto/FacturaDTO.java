@@ -1,6 +1,6 @@
 package com.hotel.backend.dto;
 
-import com.hotel.backend.model.emuns.EstadoPago;
+import com.hotel.backend.enums.EstadoPago;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

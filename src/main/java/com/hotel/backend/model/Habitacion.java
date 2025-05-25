@@ -1,6 +1,6 @@
 package com.hotel.backend.model;
 
-import com.hotel.backend.model.emuns.EstadoHabitacion;
+import com.hotel.backend.enums.EstadoHabitacion;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.hotel.backend.dto;
 
-import com.hotel.backend.model.emuns.ERole;
+import com.hotel.backend.enums.ERole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
 package com.hotel.backend.dto;
 
-import com.hotel.backend.model.emuns.EstadoReservacion;
+import com.hotel.backend.enums.EstadoReservacion;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;

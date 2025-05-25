@@ -1,6 +1,6 @@
 package com.hotel.backend.repository;
 import com.hotel.backend.model.Reserva;
-import com.hotel.backend.model.emuns.EstadoReservacion;
+import com.hotel.backend.enums.EstadoReservacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

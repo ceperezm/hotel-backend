@@ -1,4 +1,4 @@
-package com.hotel.backend.model.emuns;
+package com.hotel.backend.enums;
 
 public enum EstadoPago {
     PENDIENTE,

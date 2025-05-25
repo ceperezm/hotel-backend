@@ -1,6 +1,6 @@
 package com.hotel.backend.model;
 
-import com.hotel.backend.model.emuns.EstadoPago;
+import com.hotel.backend.enums.EstadoPago;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.PositiveOrZero;
