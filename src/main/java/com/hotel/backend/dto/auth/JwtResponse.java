@@ -1,6 +1,4 @@
-package com.hotel.backend.dto;
-
-import jakarta.validation.constraints.NotBlank;
+package com.hotel.backend.dto.auth;
 
 import java.util.List;
 

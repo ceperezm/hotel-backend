@@ -1,4 +1,4 @@
-package com.hotel.backend.dto;
+package com.hotel.backend.dto.usuario;
 
 import com.hotel.backend.enums.ERole;
 import jakarta.validation.constraints.Email;

@@ -91,5 +91,30 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
+    //Maneja cuando la la habitacion ocupadas
+    @ExceptionHandler(HabitacionNoDisponible.class)
+    public ResponseEntity<ApiError> handleRoomNoAvailable(HabitacionNoDisponible habitacionNoDisponible) {
+        ApiError apiError = ApiError.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .message(habitacionNoDisponible.getMessage())
+                .errors(null)
+                .build();
+
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ProblemaRealizarCheckIn.class)
+    public ResponseEntity<ApiError> handlerProblemaEstadoReserva(ProblemaRealizarCheckIn ex){
+        ApiError apiError = ApiError.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .message(ex.getMessage())
+                .errors(null)
+                .build();
+
+        return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
+    }
+
 
 }

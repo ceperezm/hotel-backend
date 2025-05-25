@@ -1,6 +1,6 @@
 package com.hotel.backend.dto;
 
-import com.hotel.backend.enums.EstadoReservacion;
+import com.hotel.backend.enums.EstadoReserva;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -27,7 +27,7 @@ public class ReservaDTO {
     String notas;
 
     @NotNull
-    EstadoReservacion estadoReservacion;
+    EstadoReserva estadoReservacion;
     @NotNull
     Long habitacionId;
     @NotNull

@@ -1,4 +1,4 @@
-package com.hotel.backend.dto;
+package com.hotel.backend.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

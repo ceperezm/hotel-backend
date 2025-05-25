@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface ReservacionMapper {
+public interface ReservaMapper {
     @Mapping(source = "habitacion.id", target = "habitacionId")
     @Mapping(source = "habitacion.numero", target = "numeroHabitacion")
     @Mapping(source = "huesped.id", target = "huespedId")

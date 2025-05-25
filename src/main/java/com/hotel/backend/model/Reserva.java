@@ -1,6 +1,6 @@
 package com.hotel.backend.model;
 
-import com.hotel.backend.enums.EstadoReservacion;
+import com.hotel.backend.enums.EstadoReserva;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -39,7 +39,7 @@ public class Reserva {
     private String notas;
 
     @Enumerated(EnumType.STRING)
-    private EstadoReservacion estadoReserva;
+    private EstadoReserva estadoReserva;
 
     // Relación con factura
     @OneToOne(mappedBy = "reservacion", cascade = CascadeType.ALL)
