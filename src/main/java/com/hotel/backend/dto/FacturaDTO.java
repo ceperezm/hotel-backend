@@ -25,5 +25,5 @@ public class FacturaDTO {
     @NotNull
     EstadoPago estadoPago;
     @NotNull
-    Long reservacionId;
+    Long reservaId;
 }

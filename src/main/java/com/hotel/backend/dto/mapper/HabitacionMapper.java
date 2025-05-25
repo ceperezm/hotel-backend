@@ -12,6 +12,6 @@ public interface HabitacionMapper {
     HabitacionDTO toDTO(Habitacion habitacion);
 
     @Mapping(target = "tipoHabitacion", ignore = true)
-    @Mapping(target = "reservaciones", ignore = true)
+    @Mapping(target = "reservaciones", ignore = true) //campo en la entidad
     Habitacion toEntity(HabitacionDTO habitacionDTO);
 }

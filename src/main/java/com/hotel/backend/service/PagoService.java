@@ -8,6 +8,11 @@ import java.util.List;
 @Service
 public interface PagoService {
     PagoDTO registrarPago(PagoDTO pagoDTO);
+    PagoDTO actualizarPago(Long id, PagoDTO dto);
+    void eliminarPago(Long id);
+
+    PagoDTO obtenerPagoPorId(Long id);
+
     List<PagoDTO> listarPagosPorFactura(Long facturaId);
     List<PagoDTO> listarTodosPagos();
 }

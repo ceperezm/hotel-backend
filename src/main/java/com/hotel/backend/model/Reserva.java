@@ -42,7 +42,7 @@ public class Reserva {
     private EstadoReserva estadoReserva;
 
     // Relación con factura
-    @OneToOne(mappedBy = "reservacion", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL)
     private Factura factura;
 
     //Relación con habitacion

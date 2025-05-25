@@ -7,10 +7,10 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface FacturaMapper {
-    @Mapping(source = "reservacion.id", target = "reservacionId")
+    @Mapping(source = "reserva.id", target = "reservaId")
     FacturaDTO toDTO(Factura factura);
 
-    @Mapping(target = "reservacion", ignore = true)
+    @Mapping(target = "reserva", ignore = true)
     @Mapping(target = "pagos", ignore = true)
     Factura toEntity(FacturaDTO facturaDTO);
 }

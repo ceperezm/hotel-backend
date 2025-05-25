@@ -25,10 +25,6 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "reservacion_id", nullable = false)
-    private Reserva reservacion;
-
     @Column(name = "numero_factura", unique = true)
     private String numeroFactura;
 
@@ -50,4 +46,8 @@ public class Factura {
     // Relación con pagos
     @OneToMany(mappedBy = "factura", cascade = CascadeType.ALL)
     private List<Pago> pagos = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "reserva_id", nullable = false)
+    private Reserva reserva;
 }
