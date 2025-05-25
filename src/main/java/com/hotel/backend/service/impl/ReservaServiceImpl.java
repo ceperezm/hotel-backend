@@ -120,10 +120,18 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public void cancelarReserva(Long id) {
+        Reserva reserva = reservaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Reserva no encontrada con ID: " + id));
+
+        reserva.setEstadoReserva(EstadoReserva.CANCELADA);
+        reservaRepository.save(reserva);
+    }
+
+    @Override
+    public void eliminarReserva(Long id) {
         if (!reservaRepository.existsById(id)) {
             throw new ResourceNotFoundException("Reserva no encontrada con ID: " + id);
         }
-
         reservaRepository.deleteById(id);
     }
 

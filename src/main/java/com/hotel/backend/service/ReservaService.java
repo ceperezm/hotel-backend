@@ -10,6 +10,7 @@ public interface ReservaService {
     ReservaDTO crearReserva(ReservaDTO reservaDTO);
     ReservaDTO actualizarReserva(Long id, ReservaDTO reservaDTO);
     void cancelarReserva(Long id);
+    void eliminarReserva(Long id);
     ReservaDTO obtenerReservaPorId(Long id);
     List<ReservaDTO> listarReservas();
     List<ReservaDTO> listarReservasPorUsuario(Long usuarioId);

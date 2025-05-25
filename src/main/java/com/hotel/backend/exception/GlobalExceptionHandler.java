@@ -78,7 +78,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
-    //Maneja cuando la factura ya existe
+    //Maneja cuando la reserva ya existe
     @ExceptionHandler(ReservaYaExiste.class)
     public ResponseEntity<ApiError> handleUserAlreadyExists(ReservaYaExiste reservaAlreadyExists) {
         ApiError apiError = ApiError.builder()
@@ -91,7 +91,20 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
-    //Maneja cuando la la habitacion ocupadas
+    //Maneja cuando el huesped ya existe
+    @ExceptionHandler(HuespedYaExiste.class)
+    public ResponseEntity<ApiError> handleUserAlreadyExists(HuespedYaExiste huespedAlreadyExists) {
+        ApiError apiError = ApiError.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .message(huespedAlreadyExists.getMessage())
+                .errors(null)
+                .build();
+
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
+    //Maneja cuando la habitacion ocupadas
     @ExceptionHandler(HabitacionNoDisponible.class)
     public ResponseEntity<ApiError> handleRoomNoAvailable(HabitacionNoDisponible habitacionNoDisponible) {
         ApiError apiError = ApiError.builder()
@@ -104,6 +117,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
+    //Maneja cuando la el checkin falla
     @ExceptionHandler(ProblemaRealizarCheckIn.class)
     public ResponseEntity<ApiError> handlerProblemaEstadoReserva(ProblemaRealizarCheckIn ex){
         ApiError apiError = ApiError.builder()

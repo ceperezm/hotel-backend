@@ -61,9 +61,10 @@ public class HabitacionServiceImpl implements HabitacionService {
 
     @Override
     public HabitacionDTO obtenerHabitacionPorId(Long id) {
-        Habitacion habitacion = habitacionRepository.findById(id)
+        return habitacionRepository.findById(id)
+                .map(habitacionMapper::toDTO)
                 .orElseThrow(() -> new ResourceNotFoundException("Habitacion no encontrada con id: " + id));
-        return habitacionMapper.toDTO(habitacion);
+
     }
 
     @Override
