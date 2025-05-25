@@ -1,10 +1,6 @@
-package com.hotel.backend.exception.Handler;
+package com.hotel.backend.exception;
 
 
-import com.hotel.backend.exception.FacturaYaExiste;
-import com.hotel.backend.exception.ReservaYaExiste;
-import com.hotel.backend.exception.ResourceNotFoundException;
-import com.hotel.backend.exception.UsuarioYaExiste;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

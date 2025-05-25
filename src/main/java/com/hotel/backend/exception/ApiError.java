@@ -1,4 +1,4 @@
-package com.hotel.backend.exception.Handler;
+package com.hotel.backend.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -42,14 +42,10 @@ public class Usuario {
     @NotBlank
     private String password;
 
-    //Relacion con usuario
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuarios_roles",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id")
-    )
-    private Set<Rol> roles;
+    //Relacion con roles
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rol_id", referencedColumnName = "id")
+    private Rol rol;
 
     // Relación con reservaciones
     @OneToMany(mappedBy = "usuario")
