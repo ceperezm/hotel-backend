@@ -104,6 +104,19 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
+    //Maneja cuando el tipo de habitacion ya existe
+    @ExceptionHandler(TipoHabitacionYaExiste.class)
+    public ResponseEntity<ApiError> handleUserAlreadyExists(TipoHabitacionYaExiste tipoHabitacionYaExiste) {
+        ApiError apiError = ApiError.builder()
+                .timestamp(LocalDateTime.now())
+                .status(HttpStatus.CONFLICT.value())
+                .message(tipoHabitacionYaExiste.getMessage())
+                .errors(null)
+                .build();
+
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
     //Maneja cuando la habitacion ocupadas
     @ExceptionHandler(HabitacionNoDisponible.class)
     public ResponseEntity<ApiError> handleRoomNoAvailable(HabitacionNoDisponible habitacionNoDisponible) {
