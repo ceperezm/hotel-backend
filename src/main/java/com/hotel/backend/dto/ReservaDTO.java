@@ -27,7 +27,7 @@ public class ReservaDTO {
     String notas;
 
     @NotNull
-    EstadoReserva estadoReservacion;
+    EstadoReserva estadoReserva;
     @NotNull
     Long habitacionId;
     @NotNull

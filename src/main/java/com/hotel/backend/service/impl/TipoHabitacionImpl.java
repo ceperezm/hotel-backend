@@ -1,9 +1,13 @@
 package com.hotel.backend.service.impl;
 import com.hotel.backend.dto.TipoHabitacionDTO;
 import com.hotel.backend.service.TipoHabitacionService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class TipoHabitacionImpl implements TipoHabitacionService {
     @Override
     public TipoHabitacionDTO crearTipo(TipoHabitacionDTO tipoHabitacionDTO) {

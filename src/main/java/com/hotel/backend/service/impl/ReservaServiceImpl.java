@@ -65,7 +65,7 @@ public class ReservaServiceImpl implements ReservaService {
                 .fechaCheckout(dto.getFechaCheckout())
                 .numPersonas(dto.getNumPersonas())
                 .notas(dto.getNotas())
-                .estadoReserva(dto.getEstadoReservacion())
+                .estadoReserva(dto.getEstadoReserva())
                 .habitacion(habitacion)
                 .huesped(huesped)
                 .usuario(usuario)
@@ -110,7 +110,7 @@ public class ReservaServiceImpl implements ReservaService {
         reserva.setFechaCheckout(dto.getFechaCheckout());
         reserva.setNumPersonas(dto.getNumPersonas());
         reserva.setNotas(dto.getNotas());
-        reserva.setEstadoReserva(dto.getEstadoReservacion());
+        reserva.setEstadoReserva(dto.getEstadoReserva());
         reserva.setHabitacion(habitacion);
         reserva.setHuesped(huesped);
         reserva.setUsuario(usuario);

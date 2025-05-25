@@ -2,9 +2,14 @@ package com.hotel.backend.service.impl;
 
 import com.hotel.backend.dto.PagoDTO;
 import com.hotel.backend.service.PagoService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+@Service
+@RequiredArgsConstructor
 public class PagoServiceImpl implements PagoService {
     @Override
     public PagoDTO registrarPago(PagoDTO pagoDTO) {
