@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Long> {
     Optional<Factura> findByNumeroFactura(String numeroFactura);
+    boolean existsByNumeroFactura(String numeroFactura);
 }
