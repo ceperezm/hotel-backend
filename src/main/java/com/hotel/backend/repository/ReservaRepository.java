@@ -23,4 +23,6 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
             @Param("fechaCheckin") LocalDate fechaCheckin,
             @Param("fechaCheckout") LocalDate fechaCheckout
     );
+    List<Reserva> findByUsuarioId(Long usuarioId);
+
 }

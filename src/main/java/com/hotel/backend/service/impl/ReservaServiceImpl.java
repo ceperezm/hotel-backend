@@ -149,10 +149,15 @@ public class ReservaServiceImpl implements ReservaService {
                 .toList();
     }
 
-///Falta este servicio
     @Override
     public List<ReservaDTO> listarReservasPorUsuario(Long usuarioId) {
-        return List.of();
+        if (!usuarioRepository.existsById(usuarioId)) {
+            throw new ResourceNotFoundException("Usuario no encontrado con ID: " + usuarioId);
+        }
+
+        return reservaRepository.findByUsuarioId(usuarioId).stream()
+                .map(reservaMapper::toDTO)
+                .toList();
     }
 
     @Override
