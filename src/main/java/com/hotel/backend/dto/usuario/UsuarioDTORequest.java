@@ -31,5 +31,5 @@ public class UsuarioDTORequest {
     private String password;
 
     @NotNull
-    private ERole rol;
+    private String rol;
 }
