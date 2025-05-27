@@ -3,6 +3,7 @@ package com.hotel.backend.service.impl;
 import com.hotel.backend.dto.mapper.UsuarioMapper;
 import com.hotel.backend.dto.usuario.UsuarioDTORequest;
 import com.hotel.backend.dto.usuario.UsuarioDTOResponse;
+import com.hotel.backend.enums.ERole;
 import com.hotel.backend.exception.ResourceNotFoundException;
 import com.hotel.backend.exception.UsuarioYaExiste;
 import com.hotel.backend.model.Rol;
@@ -47,20 +48,28 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDTOResponse crearUsuario(UsuarioDTORequest dto) {
-        if(usuarioRepository.findByEmail(dto.getEmail()).isPresent()){
-            throw new UsuarioYaExiste("El correo ya esta registrado.");
+        if (usuarioRepository.findByEmail(dto.getEmail()).isPresent()) {
+            throw new UsuarioYaExiste("El correo ya está registrado.");
         }
         if (usuarioRepository.existsByNombreUsuario(dto.getNombreUsuario())) {
             throw new UsuarioYaExiste("Ya existe un usuario con ese nombre de usuario.");
         }
 
-        Rol rol = rolRepository.findByNombre(dto.getRol())
-                .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado con nombre: " + dto.getRol()));
+        // Convertir String a Enum
+        ERole rolEnum;
+        try {
+            rolEnum = ERole.valueOf(dto.getRol()); // dto.getRol() debe ser "ROLE_RECEPCIONISTA" o "ROLE_ADMIN"
+        } catch (IllegalArgumentException e) {
+            throw new ResourceNotFoundException("Rol inválido: " + dto.getRol());
+        }
 
+        Rol rol = rolRepository.findByNombre(rolEnum)
+                .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado: " + dto.getRol()));
 
         Usuario usuario = usuarioMapper.toEntity(dto);
         usuario.setRol(rol);
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
+
         return usuarioMapper.toDTO(usuarioRepository.save(usuario));
     }
 
@@ -69,18 +78,27 @@ public class UsuarioServiceImpl implements UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
 
-        Rol rol = rolRepository.findByNombre(dto.getRol())
-                .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado con nombre: " + dto.getRol()));
+        // Convertir String a Enum
+        ERole rolEnum;
+        try {
+            rolEnum = ERole.valueOf(dto.getRol());
+        } catch (IllegalArgumentException e) {
+            throw new ResourceNotFoundException("Rol inválido: " + dto.getRol());
+        }
+
+        Rol rol = rolRepository.findByNombre(rolEnum)
+                .orElseThrow(() -> new ResourceNotFoundException("Rol no encontrado: " + dto.getRol()));
 
         usuario.setNombre(dto.getNombre());
         usuario.setApellido(dto.getApellido());
         usuario.setNombreUsuario(dto.getNombreUsuario());
         usuario.setEmail(dto.getEmail());
-        usuario.setPassword(dto.getPassword());
+        usuario.setPassword(passwordEncoder.encode(dto.getPassword())); // Cifrar también en la actualización
         usuario.setRol(rol);
 
         return usuarioMapper.toDTO(usuarioRepository.save(usuario));
     }
+
 
     @Override
     public void eliminarUsuario(Long id) {
