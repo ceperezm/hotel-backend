@@ -21,13 +21,12 @@ public class TipoHabitacionImpl implements TipoHabitacionService {
 
     @Override
     public TipoHabitacionDTO crearTipo(TipoHabitacionDTO tipoHabitacionDTO) {
-        //verificar si el tipo de habitacion ya existe
-        if(tipoHabitacionRepository.findById(tipoHabitacionDTO.getId()).isPresent()) {
-            throw new TipoHabitacionYaExiste("Tipo de habitación ya existe con id: " + tipoHabitacionDTO.getId());
+        // Validación por nombre
+        if (tipoHabitacionRepository.findByNombre(tipoHabitacionDTO.getNombre()).isPresent()) {
+            throw new TipoHabitacionYaExiste("Tipo de habitación ya existe con nombre: " + tipoHabitacionDTO.getNombre());
         }
-        // Mapear DTO a entidad para poder guardarlo
+
         TipoHabitacion tipoHabitacion = tipoHabitacionMapper.toEntity(tipoHabitacionDTO);
-        // Guardar huesped y lo retorna como dto
         return tipoHabitacionMapper.toDTO(tipoHabitacionRepository.save(tipoHabitacion));
     }
 
