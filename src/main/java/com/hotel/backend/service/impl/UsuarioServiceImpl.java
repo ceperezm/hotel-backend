@@ -58,7 +58,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Convertir String a Enum
         ERole rolEnum;
         try {
-            rolEnum = ERole.valueOf(dto.getRol()); // dto.getRol() debe ser "ROLE_RECEPCIONISTA" o "ROLE_ADMIN"
+            rolEnum = ERole.valueOf("ROLE_" + dto.getRol().toUpperCase());// dto.getRol() debe ser "ROLE_RECEPCIONISTA" o "ROLE_ADMIN"
         } catch (IllegalArgumentException e) {
             throw new ResourceNotFoundException("Rol inválido: " + dto.getRol());
         }
@@ -81,7 +81,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         // Convertir String a Enum
         ERole rolEnum;
         try {
-            rolEnum = ERole.valueOf(dto.getRol());
+            rolEnum = ERole.valueOf("ROLE_" + dto.getRol().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ResourceNotFoundException("Rol inválido: " + dto.getRol());
         }
