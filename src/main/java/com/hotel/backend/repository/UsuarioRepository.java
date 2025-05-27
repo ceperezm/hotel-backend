@@ -13,11 +13,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByEmail(String email);
     Boolean existsByEmail(String email);
     Boolean existsByNombreUsuario(String username);
-    // Para otros casos (no carga el rol)
     Optional<Usuario> findByNombreUsuario(String nombreUsuario);
-
-    // Para autenticación (carga el rol)
-    @Query("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.nombreUsuario = :nombreUsuario")
-    Optional<Usuario> findByNombreUsuarioWithRol(@Param("nombreUsuario") String nombreUsuario);
 
 }

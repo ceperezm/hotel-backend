@@ -42,7 +42,7 @@ public class Usuario {
     private String password;
 
     //Relacion con roles
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
 
