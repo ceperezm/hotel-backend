@@ -27,7 +27,7 @@ public class AuthServiceImpl implements AuthService {
                 )
         );
 
-        // Establecer contexto de seguridad (IMPORTANTE - esto faltaba en tu código)
+        // Establecer contexto de seguridad
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Extraer username del objeto Authentication y generar token
