@@ -6,11 +6,12 @@ import com.hotel.backend.enums.EstadoHabitacion;
 import com.hotel.backend.exception.ResourceNotFoundException;
 import com.hotel.backend.model.Habitacion;
 import com.hotel.backend.model.TipoHabitacion;
-import com.hotel.backend.repository.HabitacionRepository;
-import com.hotel.backend.repository.TipoHabitacionRepository;
+import com.hotel.backend.repository.local.HabitacionRepository;
+import com.hotel.backend.repository.local.TipoHabitacionRepository;
 import com.hotel.backend.service.HabitacionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class HabitacionServiceImpl implements HabitacionService {
     private final HabitacionMapper habitacionMapper;
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public HabitacionDTO registrarHabitacion(HabitacionDTO dto) {
         TipoHabitacion tipoHabitacion = tipoHabitacionRepository.findById(dto.getTipoHabitacionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Tipo de habitacion no encontrado"));
@@ -35,6 +37,7 @@ public class HabitacionServiceImpl implements HabitacionService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public HabitacionDTO actualizarHabitacion(Long id, HabitacionDTO dto) {
         Habitacion habitacion = habitacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Habitacion no encontrada con id: " + id));
@@ -51,6 +54,7 @@ public class HabitacionServiceImpl implements HabitacionService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void cambiarEstadoHabitacion(Long id, EstadoHabitacion nuevoEstado) {
         Habitacion habitacion = habitacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Habitación no encontrada con ID: " + id));
@@ -75,6 +79,7 @@ public class HabitacionServiceImpl implements HabitacionService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void eliminarHabitacion(Long id) {
         if(!habitacionRepository.existsById(id)){
             throw new ResourceNotFoundException("Habitacion no encontrada con id: " + id);

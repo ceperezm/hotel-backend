@@ -5,11 +5,12 @@ import com.hotel.backend.dto.mapper.PagoMapper;
 import com.hotel.backend.exception.ResourceNotFoundException;
 import com.hotel.backend.model.Factura;
 import com.hotel.backend.model.Pago;
-import com.hotel.backend.repository.FacturaRepository;
-import com.hotel.backend.repository.PagoRepository;
+import com.hotel.backend.repository.local.FacturaRepository;
+import com.hotel.backend.repository.local.PagoRepository;
 import com.hotel.backend.service.PagoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class PagoServiceImpl implements PagoService {
     private final PagoMapper pagoMapper;
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public PagoDTO registrarPago(PagoDTO dto) {
         Factura factura = facturaRepository.findById(dto.getFacturaId())
                 .orElseThrow(() -> new ResourceNotFoundException("Factura no encontrada con ID: " + dto.getFacturaId()));
@@ -33,6 +35,7 @@ public class PagoServiceImpl implements PagoService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public PagoDTO actualizarPago(Long id, PagoDTO dto) {
         Pago pagoExistente = pagoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pago no encontrado con ID: " + id));
@@ -50,6 +53,7 @@ public class PagoServiceImpl implements PagoService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void eliminarPago(Long id) {
         if (!pagoRepository.existsById(id)) {
             throw new ResourceNotFoundException("Pago no encontrado con ID: " + id);
