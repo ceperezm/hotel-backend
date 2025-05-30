@@ -1,4 +1,4 @@
-package com.hotel.backend.repository;
+package com.hotel.backend.repository.local;
 
 import com.hotel.backend.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +14,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Boolean existsByEmail(String email);
     Boolean existsByNombreUsuario(String username);
     Optional<Usuario> findByNombreUsuario(String nombreUsuario);
+    //findByNombreUsuarioWithRol
+    @Query("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.nombreUsuario = :nombreUsuario")
+    Optional<Usuario> findByNombreUsuarioWithRol(@Param("nombreUsuario") String nombreUsuario);
 
 }

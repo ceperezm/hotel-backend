@@ -1,4 +1,4 @@
-package com.hotel.backend.repository;
+package com.hotel.backend.repository.local;
 
 import com.hotel.backend.model.Factura;
 import org.springframework.data.jpa.repository.JpaRepository;

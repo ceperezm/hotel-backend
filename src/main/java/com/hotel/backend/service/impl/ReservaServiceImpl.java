@@ -12,13 +12,14 @@ import com.hotel.backend.model.Habitacion;
 import com.hotel.backend.model.Huesped;
 import com.hotel.backend.model.Reserva;
 import com.hotel.backend.model.Usuario;
-import com.hotel.backend.repository.HabitacionRepository;
-import com.hotel.backend.repository.HuespedRepository;
-import com.hotel.backend.repository.ReservaRepository;
-import com.hotel.backend.repository.UsuarioRepository;
+import com.hotel.backend.repository.local.HabitacionRepository;
+import com.hotel.backend.repository.local.HuespedRepository;
+import com.hotel.backend.repository.local.ReservaRepository;
+import com.hotel.backend.repository.local.UsuarioRepository;
 import com.hotel.backend.service.ReservaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class ReservaServiceImpl implements ReservaService {
 
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public ReservaDTO crearReserva(ReservaDTO dto) {
         Habitacion habitacion = habitacionRepository.findById(dto.getHabitacionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Habitación no encontrada"));
@@ -75,6 +77,7 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public ReservaDTO actualizarReserva(Long id, ReservaDTO dto) {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reserva no encontrada"));
@@ -119,6 +122,7 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void cancelarReserva(Long id) {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reserva no encontrada con ID: " + id));
@@ -128,6 +132,7 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void eliminarReserva(Long id) {
         if (!reservaRepository.existsById(id)) {
             throw new ResourceNotFoundException("Reserva no encontrada con ID: " + id);
@@ -161,6 +166,7 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void realizarCheckIn(Long reservaId) {
         Reserva reserva = reservaRepository.findById(reservaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Reserva no encontrada con ID: " + reservaId));
@@ -183,6 +189,7 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void realizarCheckOut(Long reservaId) {
         Reserva reserva = reservaRepository.findById(reservaId)
                 .orElseThrow(() -> new ResourceNotFoundException("Reserva no encontrada con ID: " + reservaId));

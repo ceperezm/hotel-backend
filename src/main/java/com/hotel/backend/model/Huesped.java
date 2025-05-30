@@ -1,5 +1,6 @@
 package com.hotel.backend.model;
 
+import com.hotel.backend.listeners.EntityListener;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.*;
@@ -19,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(EntityListener.class)
 public class Huesped {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

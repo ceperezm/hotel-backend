@@ -1,6 +1,7 @@
 package com.hotel.backend.model;
 
 import com.hotel.backend.enums.EstadoPago;
+import com.hotel.backend.listeners.EntityListener;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -20,6 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(EntityListener.class)
 public class Factura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,7 +1,7 @@
 package com.hotel.backend.security.service;
 
 import com.hotel.backend.model.Usuario;
-import com.hotel.backend.repository.UsuarioRepository;
+import com.hotel.backend.repository.local.UsuarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

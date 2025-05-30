@@ -1,4 +1,4 @@
-package com.hotel.backend.repository;
+package com.hotel.backend.repository.local;
 import com.hotel.backend.model.Reserva;
 import com.hotel.backend.enums.EstadoReserva;
 import org.springframework.data.jpa.repository.JpaRepository;

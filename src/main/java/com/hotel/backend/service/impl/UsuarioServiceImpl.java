@@ -8,12 +8,17 @@ import com.hotel.backend.exception.ResourceNotFoundException;
 import com.hotel.backend.exception.UsuarioYaExiste;
 import com.hotel.backend.model.Rol;
 import com.hotel.backend.model.Usuario;
-import com.hotel.backend.repository.RolRepository;
-import com.hotel.backend.repository.UsuarioRepository;
+import com.hotel.backend.repository.local.RolRepository;
+import com.hotel.backend.repository.local.UsuarioRepository;
 import com.hotel.backend.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;  // <-- Import correcto de Spring
+
+
+
+
 
 import java.util.List;
 
@@ -47,6 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public UsuarioDTOResponse crearUsuario(UsuarioDTORequest dto) {
         if (usuarioRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new UsuarioYaExiste("El correo ya está registrado.");
@@ -74,6 +80,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public UsuarioDTOResponse actualizarUsuario(Long id, UsuarioDTORequest dto) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
@@ -101,6 +108,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void eliminarUsuario(Long id) {
         if (!usuarioRepository.existsById(id)) {
             throw new ResourceNotFoundException("Usuario no encontrado con ID: " + id);

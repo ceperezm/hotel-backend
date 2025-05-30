@@ -1,15 +1,14 @@
 package com.hotel.backend.service.impl;
 import com.hotel.backend.dto.TipoHabitacionDTO;
 import com.hotel.backend.dto.mapper.TipoHabitacionMapper;
-import com.hotel.backend.exception.HuespedYaExiste;
 import com.hotel.backend.exception.ResourceNotFoundException;
 import com.hotel.backend.exception.TipoHabitacionYaExiste;
-import com.hotel.backend.model.Huesped;
 import com.hotel.backend.model.TipoHabitacion;
-import com.hotel.backend.repository.TipoHabitacionRepository;
+import com.hotel.backend.repository.local.TipoHabitacionRepository;
 import com.hotel.backend.service.TipoHabitacionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +19,7 @@ public class TipoHabitacionImpl implements TipoHabitacionService {
     private final TipoHabitacionMapper tipoHabitacionMapper;
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public TipoHabitacionDTO crearTipo(TipoHabitacionDTO tipoHabitacionDTO) {
         // Validación por nombre
         if (tipoHabitacionRepository.findByNombre(tipoHabitacionDTO.getNombre()).isPresent()) {
@@ -31,6 +31,7 @@ public class TipoHabitacionImpl implements TipoHabitacionService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public TipoHabitacionDTO actualizarTipo(Long id, TipoHabitacionDTO tipoHabitacionDTO) {
         TipoHabitacion existente = tipoHabitacionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tipo de habitación no encontrado con ID: " + id));
@@ -43,6 +44,7 @@ public class TipoHabitacionImpl implements TipoHabitacionService {
     }
 
     @Override
+    @Transactional(transactionManager = "localTransactionManager")
     public void eliminarTipo(Long id) {
         if(!tipoHabitacionRepository.existsById(id)){
             throw new ResourceNotFoundException("El tipo de Habitacion no encontrado con id: " + id);
