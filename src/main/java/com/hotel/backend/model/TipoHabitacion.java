@@ -1,5 +1,6 @@
 package com.hotel.backend.model;
 
+import com.hotel.backend.listeners.EntityListener;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -18,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(EntityListener.class)
 public class TipoHabitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

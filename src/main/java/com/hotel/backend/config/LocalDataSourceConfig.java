@@ -30,13 +30,37 @@ public class LocalDataSourceConfig {
     @Value("${local.datasource.driver-class-name}")
     private String localDriver;
 
+    @Value("${local.datasource.connection-properties:busy_timeout=30000;journal_mode=WAL;synchronous=NORMAL}")
+    private String connectionProperties;
+
     @Bean
     @Primary
     public DataSource localDataSource() {
-        return DataSourceBuilder.create()
+        DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create()
                 .driverClassName(localDriver)
-                .url(localUrl)
-                .build();
+                .url(localUrl);
+
+        DataSource dataSource = dataSourceBuilder.build();
+
+        if (dataSource instanceof com.zaxxer.hikari.HikariDataSource hikariDataSource) {
+            hikariDataSource.setMaximumPoolSize(5);
+            hikariDataSource.setMinimumIdle(2);
+            hikariDataSource.setConnectionTimeout(60000); // 60 segundos
+            hikariDataSource.setIdleTimeout(120000); // 2 minutos
+            hikariDataSource.setMaxLifetime(300000); // 5 minutos
+            hikariDataSource.setLeakDetectionThreshold(60000); // 60 segundos
+            hikariDataSource.setConnectionInitSql("PRAGMA foreign_keys=ON; PRAGMA busy_timeout=30000; PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;");
+            hikariDataSource.setAutoCommit(true);
+
+            // Propiedades para evitar bloqueos
+            hikariDataSource.setConnectionTestQuery("SELECT 1");
+            hikariDataSource.setValidationTimeout(5000);
+            hikariDataSource.setAllowPoolSuspension(false);
+            // Eliminamos esta línea que causa el conflicto con Spring Boot
+            // hikariDataSource.setRegisterMbeans(true);
+        }
+
+        return dataSource;
     }
 
     @Bean
@@ -55,6 +79,16 @@ public class LocalDataSourceConfig {
         properties.put("hibernate.show_sql", true);
         properties.put("hibernate.format_sql", true);
 
+        // Propiedades para mejorar rendimiento con SQLite
+        properties.put("hibernate.connection_handling", "DELAYED_ACQUISITION_AND_RELEASE_AFTER_TRANSACTION");
+        properties.put("hibernate.jdbc.batch_size", 10);
+        properties.put("hibernate.order_inserts", true);
+        properties.put("hibernate.jdbc.time_zone", "UTC");
+
+        // Propiedades simplificadas para evitar conflictos
+        properties.put("hibernate.connection.release_mode", "after_transaction");
+        properties.put("hibernate.connection.provider_disables_autocommit", false);
+
         emf.setJpaPropertyMap(properties);
         return emf;
     }
@@ -63,6 +97,8 @@ public class LocalDataSourceConfig {
     @Primary
     public PlatformTransactionManager localTransactionManager(
             @Qualifier("localEntityManagerFactory") EntityManagerFactory emf) {
-        return new JpaTransactionManager(emf);
+        JpaTransactionManager transactionManager = new JpaTransactionManager(emf);
+        transactionManager.setDefaultTimeout(30);
+        return transactionManager;
     }
 }

@@ -1,5 +1,6 @@
 package com.hotel.backend.model;
 
+import com.hotel.backend.listeners.EntityListener;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(EntityListener.class)
 public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

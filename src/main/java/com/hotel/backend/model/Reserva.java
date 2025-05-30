@@ -1,6 +1,7 @@
 package com.hotel.backend.model;
 
 import com.hotel.backend.enums.EstadoReserva;
+import com.hotel.backend.listeners.EntityListener;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EntityListeners(EntityListener.class)
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
